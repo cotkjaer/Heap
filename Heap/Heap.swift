@@ -28,7 +28,10 @@ public struct BinaryHeap<Element>
     
     public var isEmpty : Bool { return heap.isEmpty }
     
-    /// Push a new `element` onto the heap
+    /**
+     Push a new element onto the heap
+     - parameter element: The element to add to the heap
+     */
     public mutating func push(_ element: Element)
     {
         // use only append() and removeLast(), as they are MUCH faster than any other Array insert/remove
@@ -37,18 +40,22 @@ public struct BinaryHeap<Element>
         siftUp()
     }
     
-    /// Peek at the top of the heap (the smallest (by isOrderedBefore) element)
-    
+    /**
+     Peek at the top of the heap (the smallest (by isOrderedBefore) element)
+     - returns: The top of the heap (or nil if the heap is empty)
+    */
     public func peek() -> Element?
     {
         return heap.first
     }
     
-    /// Remove the top of the heap (the smallest (by isOrderedBefore) element)
-    
+    /** Removes the top of the heap (the smallest (by isOrderedBefore) element) and rebalances the heap
+     
+     - returns: the top of the heap (or nil if the heap is empty
+     */
     public mutating func pop() -> Element?
     {
-        let result : Element?
+        let result: Element?
         
         switch heap.endIndex
         {
@@ -78,16 +85,16 @@ public struct BinaryHeap<Element>
     private var heap = Array<Element>()
     
     // The less-than closure
-    private let isOrderedBefore : (Element, Element) -> Bool
+    private let isOrderedBefore: (Element, Element) -> Bool
     
     private func parentIndex(forChildIndex childIndex: Int) -> Int?
     {
         guard childIndex > 0 else { return nil }
         
-        return (childIndex - 1) / 2 //Int(floor((Float(childIndex) - 1) / 2))
+        return (childIndex - 1) / 2
     }
 
-    private func index(forLeastChildOfParentAtIndex parentIndex: Int) -> Int?
+    private func indexForLeastChildOfParent(atIndex parentIndex: Int) -> Int?
     {
         var childIndex : Int?
         
@@ -118,7 +125,7 @@ public struct BinaryHeap<Element>
         
         var parentIndex = heap.startIndex
         
-        while let leastChildIndex = index(forLeastChildOfParentAtIndex: parentIndex)//childIndexForLeastChild(parentIndex)
+        while let leastChildIndex = indexForLeastChildOfParent(atIndex: parentIndex)
         {
             if isOrderedBefore(heap[parentIndex], heap[leastChildIndex]) { break }
             
