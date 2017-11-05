@@ -13,7 +13,7 @@ class HeapTests: XCTestCase
 {
     func elements() -> Array<(Int, Float)>
     {
-        return stride(from: 0, to: 1000, by: 1).map({(Int(arc4random()), Float($0))})
+        return stride(from: 0, to: 10000, by: 1).map({(Int(arc4random()), Float($0))})
     }
     
     func test_init_heap()

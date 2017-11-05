@@ -69,7 +69,7 @@ public struct BinaryHeap<Element>
             result = heap.removeFirst()
             
         default:
-            swap(&heap[heap.startIndex], &heap[heap.endIndex - 1])
+            heap.swapAt(heap.startIndex, heap.endIndex - 1)
             
             result = heap.removeLast()
             
@@ -129,7 +129,7 @@ public struct BinaryHeap<Element>
         {
             if isOrderedBefore(heap[parentIndex], heap[leastChildIndex]) { break }
             
-            swap(&heap[leastChildIndex], &heap[parentIndex])
+            heap.swapAt(leastChildIndex, parentIndex)
             
             parentIndex = leastChildIndex
         }
@@ -146,7 +146,7 @@ public struct BinaryHeap<Element>
         {
             if isOrderedBefore(heap[parentIndex], heap[childIndex]) { break }
             
-            swap(&heap[childIndex], &heap[parentIndex])
+            heap.swapAt(childIndex, parentIndex)
             
             childIndex = parentIndex
         }
